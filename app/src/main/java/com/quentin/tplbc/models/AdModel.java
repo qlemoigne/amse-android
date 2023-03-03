@@ -11,17 +11,25 @@ public class AdModel implements Serializable {
     private String address;
     private int image;
 
+    private double price;
+
     /**
      *
      * @param title
      * @param address
      * @param image
+     * @param price
      */
-    public AdModel(String title, String address, int image)
+    public AdModel(String title, String address, int image, double price)
     {
         this.title = title;
         this.address = address;
         this.image = image;
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public String getTitle() {

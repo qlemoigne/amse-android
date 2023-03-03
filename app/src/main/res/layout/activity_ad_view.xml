@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/activityMainTitle"
+        android:text="Titre annonce"
 
         android:id="@+id/adViewTitle"
         android:textColor="@color/black"
@@ -24,5 +24,63 @@
 
 
         />
+
+    <com.google.android.material.imageview.ShapeableImageView
+
+
+        android:layout_marginTop="16dp"
+
+        android:id="@+id/adViewImage"
+        android:src="@drawable/image1"
+        android:layout_width="wrap_content"
+        android:layout_height="290dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@id/adViewTitle"
+
+
+
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        >
+
+    </com.google.android.material.imageview.ShapeableImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/adViewImage"
+        android:padding="16dp"
+        android:id="@+id/dataAddress">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_place_24"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15 rue de la boeties 59830 Lille"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/dataAddress"
+        android:text=""
+        android:id="@+id/adDataPrice"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginHorizontal="16dp">
+
+
+    </Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
