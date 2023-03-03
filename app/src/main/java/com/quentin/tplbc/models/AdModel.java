@@ -9,7 +9,7 @@ public class AdModel implements Serializable {
 
     private String title;
     private String address;
-    private int image;
+    private String image;
 
     private double price;
 
@@ -20,7 +20,7 @@ public class AdModel implements Serializable {
      * @param image
      * @param price
      */
-    public AdModel(String title, String address, int image, double price)
+    public AdModel(String title, String address, String image, double price)
     {
         this.title = title;
         this.address = address;
@@ -40,7 +40,11 @@ public class AdModel implements Serializable {
         return address;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
+    }
+
+    public boolean isInvalidImage() {
+        return image == null || image.length() <= 0;
     }
 }

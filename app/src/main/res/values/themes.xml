@@ -22,4 +22,12 @@
     <style name="Theme.TPLBC.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.TPLBC.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="textInputLayout" parent="ThemeOverlay.Material3.TextInputEditText.OutlinedBox">
+        <item name="startIconTint">@color/purple_200</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+
+    </style>
 </resources>

@@ -1,6 +1,12 @@
 package com.quentin.tplbc;
 
+import static com.quentin.tplbc.DBHelper.ADDRESS;
+import static com.quentin.tplbc.DBHelper.IMAGE;
+import static com.quentin.tplbc.DBHelper.PRICE;
+import static com.quentin.tplbc.DBHelper.TITLE;
+
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -26,6 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,24 +49,28 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        adList = new ArrayList<>();
 
 
-        adList.add( new AdModel("Titre 1", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 2", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 3", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 4", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 5", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 6", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 7", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 8", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 9", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 10", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 11", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 12", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 13", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 14", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
-        adList.add( new AdModel("Titre 15", "15 rue de la berge 595500 Douai", R.drawable.image1, 15.5));
+        Intent intent = getIntent();
+
+        if(intent != null)
+        {
+            if(intent.hasExtra("newAdTittle"))
+            {
+                Snackbar.make(binding.getRoot(), "L'annonce " + intent.getStringExtra("newAdTittle") + " a été créé succès !", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        }
+
+
+     /* adList.add( new AdModel("Titre 10", "15 rue de la berge 595500 Douai", "", 15.5));
+        adList.add( new AdModel("Titre 11", "15 rue de la berge 595500 Douai", "", 15.5));
+        adList.add( new AdModel("Titre 12", "15 rue de la berge 595500 Douai","", 15.5));
+        adList.add( new AdModel("Titre 13", "15 rue de la berge 595500 Douai", "", 15.5));
+        adList.add( new AdModel("Titre 14", "15 rue de la berge 595500 Douai", "", 15.5));
+        adList.add( new AdModel("Titre 15", "15 rue de la berge 595500 Douai","", 15.5));
+*/
+
 
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
@@ -73,10 +84,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         updateAdList();
-
-
-
     }
 
     public void updateAdList()
@@ -84,6 +102,27 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        ArrayList<AdModel> adList = new ArrayList<>();
+
+        Cursor cursor = DBManager.getDBManager(this).fetch();
+
+        if(cursor == null)
+        {
+            return;
+        }
+
+       // DBManager.getDBManager(this).init();
+        while(cursor.moveToNext())
+        {
+            String title = cursor.getString(cursor.getColumnIndexOrThrow(TITLE));
+            String address = cursor.getString(cursor.getColumnIndexOrThrow(ADDRESS));
+            String image = cursor.getString(cursor.getColumnIndexOrThrow(IMAGE));
+            double price = cursor.getDouble(cursor.getColumnIndexOrThrow(PRICE));
+
+
+
+            adList.add(new AdModel(title, address, image, price));
+        }
 
         RecyclerView recyclerView = (RecyclerView) binding.listeAnnonces;
         AdAdapter adapter = new AdAdapter(this,adList);

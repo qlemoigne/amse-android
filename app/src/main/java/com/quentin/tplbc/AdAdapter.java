@@ -46,7 +46,11 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
         final AdModel data = adModelArrayList.get(position);
         holder.title.setText(data.getTitle());
         holder.address.setText(data.getAddress());
-        holder.image.setImageResource(data.getImage());
+        if(data.isInvalidImage())
+        {
+            holder.image.setImageResource(R.drawable.image1);
+
+        }
         /*holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
