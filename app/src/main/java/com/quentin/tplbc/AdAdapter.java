@@ -82,9 +82,9 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
 
         public AdViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.adTitle);
-            address = itemView.findViewById(R.id.adAddress);
-            image = itemView.findViewById(R.id.adImage);
+            title = itemView.findViewById(R.id.txt_title);
+            address = itemView.findViewById(R.id.txt_address);
+            image = itemView.findViewById(R.id.imageView);
         }
     }
 }

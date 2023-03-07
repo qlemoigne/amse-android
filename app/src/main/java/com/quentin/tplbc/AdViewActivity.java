@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.quentin.tplbc.models.AdModel;
 
 public class AdViewActivity extends AppCompatActivity {
@@ -29,8 +31,21 @@ public class AdViewActivity extends AppCompatActivity {
         AdModel data = (AdModel) intent.getSerializableExtra("ad");
 
         ((TextView)findViewById(R.id.adViewTitle)).setText(data.getTitle());
+        ((TextView) findViewById(R.id.dataPriceText)).setText(data.getPrice() + "€");
+        ((TextView) findViewById(R.id.dataAddressText)).setText(data.getAddress());
 
-        ((Button) findViewById(R.id.adDataPrice)).setText("Prix : " + data.getPrice() + "€");
+         Button button = findViewById(R.id.adDataPrice);
+
+
+         button.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Snackbar.make(v, "L'achat a été réalisé avec succès !", Snackbar.LENGTH_LONG)
+                         .setAction("Action", null).show();
+             }
+         });
+
+
 
     }
 }
