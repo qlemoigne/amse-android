@@ -1,4 +1,4 @@
-package com.quentin.tplbc;
+package com.example.tpleboncoin;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -7,23 +7,31 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.quentin.tplbc.models.AdModel;
+import com.example.tpleboncoin.AdModel;
+
+import java.io.FileOutputStream;
+import java.util.UUID;
+import java.util.logging.Logger;
 
 public class CreateAdActivity extends AppCompatActivity {
 
     private ShapeableImageView previewImage;
-
     private boolean working;
+
+    private Bitmap selectedBitmap;
+    private Uri selectedUri;
     ActivityResultLauncher<Intent> cameraActivityResultLauncher = registerForActivityResult( new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
@@ -31,6 +39,10 @@ public class CreateAdActivity extends AppCompatActivity {
                 Intent data = result.getData();
                 Bitmap image = (Bitmap) data.getExtras().get("data");
                 previewImage.setImageBitmap(image);
+
+
+                selectedBitmap= image;
+
             }
         }
     });
@@ -42,6 +54,8 @@ public class CreateAdActivity extends AppCompatActivity {
                 Intent data = result.getData();
                 Uri image = (Uri) result.getData().getData();
                 previewImage.setImageURI(image);
+
+                selectedUri = image;
             }
         }
     });
@@ -51,6 +65,8 @@ public class CreateAdActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_ad);
 
         working = false;
+        selectedBitmap = null;
+        selectedUri = null;
 
         previewImage = findViewById(R.id.previewImage);
         findViewById(R.id.editCameraImageBtn).setOnClickListener(new View.OnClickListener() {
@@ -80,9 +96,58 @@ public class CreateAdActivity extends AppCompatActivity {
                 String title = ((TextInputLayout) findViewById(R.id.labelTitle)).getEditText().getText().toString();
                 String address = ((TextInputLayout) findViewById(R.id.labelAddress)).getEditText().getText().toString();
 
-                double price = Double.parseDouble(((TextInputLayout) findViewById(R.id.labelPrice)).getEditText().getText().toString());
+                String priceText = ((TextInputLayout) findViewById(R.id.labelPrice)).getEditText().getText().toString();
 
-                String imgUrl = "";
+                if(title.length() <= 0 || address.length() <= 0 || priceText.length() <= 0)
+                {
+                    working = false;
+                    Toast.makeText(CreateAdActivity.this, R.string.errorMissingFields, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                double price = Double.parseDouble(priceText);
+
+                if(selectedBitmap == null && selectedUri == null)
+                {
+                    working = false;
+                    Toast.makeText(CreateAdActivity.this, R.string.errorMissingImage, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                String imgUrl = "internal" + UUID.randomUUID().toString().replace("-", "") + ".png";
+
+                if(selectedBitmap != null) {
+
+                    // on là store
+                    try {
+
+                        Logger.getGlobal().info("TRYING TO SAVE : " + CreateAdActivity.this.getApplication().getCacheDir() + "/" + imgUrl);
+                        FileOutputStream stream = new FileOutputStream(CreateAdActivity.this.getApplication().getCacheDir() + "/" + imgUrl);
+                        selectedBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        stream.close();
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // on met simplement url
+
+                    try {
+
+                        Logger.getGlobal().info("TRYING TO SAVE : " + CreateAdActivity.this.getApplication().getCacheDir() + "/" + imgUrl);
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(CreateAdActivity.this.getContentResolver(), selectedUri);
+
+                        FileOutputStream stream = new FileOutputStream(CreateAdActivity.this.getApplication().getCacheDir() + "/" + imgUrl);
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        stream.close();
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
 
                 DBManager.getDBManager(CreateAdActivity.this).insert(new AdModel(title, address, imgUrl, price));
 

@@ -1,4 +1,4 @@
-package com.quentin.tplbc;
+package com.example.tpleboncoin;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.quentin.tplbc.models.AdModel;
+import com.example.tpleboncoin.AdModel;
 
 public class DBManager {
 
@@ -46,7 +46,7 @@ public class DBManager {
     // Add ads manually.
     public void init(){
         open();
-        
+
         insert(new AdModel("Wood", "Douai", "https://media.istockphoto.com/id/134253640/photo/construction-of-a-wooden-roof-frame-underway.jpg?s=612x612&w=0&k=20&c=e5gUkic9LGQWahIdHozOsEzHKy_HtsmvmtOHmYsejSU=", 30.0));
         insert(new AdModel("Steel", "Lille", "https://as2.ftcdn.net/v2/jpg/03/91/83/87/1000_F_391838708_4HFADW5beay2VVlnoual6Qi5fWeIaD9V.jpg", 22.4));
         insert(new AdModel("Clay", "Douai", "https://constrofacilitator.com/wp-content/uploads/2020/02/clay-in-construction.jpg", 30940.4));

@@ -1,4 +1,4 @@
-package com.quentin.tplbc;
+package com.example.tpleboncoin;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.quentin.tplbc", appContext.getPackageName());
+        assertEquals("com.example.tpleboncoin", appContext.getPackageName());
     }
 }

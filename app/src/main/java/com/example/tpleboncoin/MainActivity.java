@@ -1,9 +1,9 @@
-package com.quentin.tplbc;
+package com.example.tpleboncoin;
 
-import static com.quentin.tplbc.DBHelper.ADDRESS;
-import static com.quentin.tplbc.DBHelper.IMAGE;
-import static com.quentin.tplbc.DBHelper.PRICE;
-import static com.quentin.tplbc.DBHelper.TITLE;
+import static com.example.tpleboncoin.DBHelper.ADDRESS;
+import static com.example.tpleboncoin.DBHelper.IMAGE;
+import static com.example.tpleboncoin.DBHelper.PRICE;
+import static com.example.tpleboncoin.DBHelper.TITLE;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -23,8 +23,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.quentin.tplbc.databinding.ActivityMainBinding;
-import com.quentin.tplbc.models.AdModel;
+import com.example.tpleboncoin.databinding.ActivityMainBinding;
+import com.example.tpleboncoin.AdModel;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,11 +32,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    public static File CACHE_DIR;
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        CACHE_DIR = getApplication().getCacheDir();
 
 
         Intent intent = getIntent();
@@ -112,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-       // DBManager.getDBManager(this).init();
+        // DBManager.getDBManager(this).init();
         while(cursor.moveToNext())
         {
             String title = cursor.getString(cursor.getColumnIndexOrThrow(TITLE));

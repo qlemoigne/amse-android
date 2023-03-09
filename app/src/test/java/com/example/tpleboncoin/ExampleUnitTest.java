@@ -1,4 +1,4 @@
-package com.quentin.tplbc;
+package com.example.tpleboncoin;
 
 import org.junit.Test;
 

@@ -1,10 +1,11 @@
-package com.quentin.tplbc.models;
+package com.example.tpleboncoin;
+
+import android.graphics.Bitmap;
+
+import androidx.annotation.Nullable;
 
 import java.io.Serializable;
 
-/**
- *
- */
 public class AdModel implements Serializable {
 
     private String title;
@@ -12,6 +13,9 @@ public class AdModel implements Serializable {
     private String image;
 
     private double price;
+
+    @Nullable
+    private Bitmap cache;
 
     /**
      *
@@ -26,6 +30,20 @@ public class AdModel implements Serializable {
         this.address = address;
         this.image = image;
         this.price = price;
+    }
+
+    public boolean isImageLoaded()
+    {
+        return cache != null;
+    }
+
+    public Bitmap getCachedImage()
+    {
+        return cache;
+    }
+
+    public void setCachedImage(@Nullable Bitmap cache) {
+        this.cache = cache;
     }
 
     public double getPrice() {
@@ -46,5 +64,19 @@ public class AdModel implements Serializable {
 
     public boolean isInvalidImage() {
         return image == null || image.length() <= 0;
+    }
+
+    public void invalidateCache()
+    {
+        cache = null;
+    }
+    public boolean isLocal() {
+
+        if(isInvalidImage()) {
+            return false;
+        }
+
+        return image.startsWith("internal");
+
     }
 }

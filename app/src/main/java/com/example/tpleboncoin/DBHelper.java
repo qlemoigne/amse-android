@@ -1,11 +1,11 @@
-package com.quentin.tplbc;
+package com.example.tpleboncoin;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.quentin.tplbc.models.AdModel;
+import com.example.tpleboncoin.AdModel;
 
 public class DBHelper extends SQLiteOpenHelper {
 

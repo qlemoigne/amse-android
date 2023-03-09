@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TPLBC</string>
+    <string name="app_name">TPLeBonCoin</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -11,7 +11,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="activityMainTitle">Annonces</string>
-    <string name="activityCreateAdTitle">Nouvelle annonce</string>
+    <string name="activityCreateAdTitle">Déposer une annonce</string>
 
     <string name="adNameTint">Nom de l\'annonce</string>
     <string name="adAddressTint">Adresse</string>
@@ -20,4 +20,6 @@
     <string name="editImageGaleryBtn">Galerie</string>
     <string name="editImageCameraBtn">Caméra</string>
     <string name="adPriceTint">Prix</string>
+    <string name="errorMissingImage">Vous devez choisir une image</string>
+    <string name="errorMissingFields">Tous les champs doivent être remplis.</string>
 </resources>
