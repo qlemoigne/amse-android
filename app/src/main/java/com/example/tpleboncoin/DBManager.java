@@ -98,7 +98,8 @@ public class DBManager {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DBHelper.TITLE, ad.getTitle());
         contentValues.put(DBHelper.ADDRESS, ad.getAddress());
-        contentValues.put(DBHelper.IMAGE, ad.getImage());
+        //contentValues.put(DBHelper.IMAGE, ad.getImage());
+        contentValues.put(DBHelper.PRICE, ad.getPrice());
         contentValues.put(DBHelper.PHONE, ad.getPhone());
         int i = database.update(DBHelper.TABLE_NAME, contentValues, DBHelper._ID + " = " + _id, null);
         return i;
