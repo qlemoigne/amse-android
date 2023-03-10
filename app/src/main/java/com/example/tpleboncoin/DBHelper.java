@@ -20,6 +20,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String PRICE = "price";
 
+    public static final String PHONE = "phone";
+
     // Database Information
     static final String DB_NAME = "LEBONCOIN.DB";
 
@@ -28,7 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // Creating table query
     private static final String CREATE_TABLE = "create table " + TABLE_NAME + "(" + _ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT NOT NULL, " + ADDRESS + " TEXT, " + IMAGE + " TEXT, " + PRICE+ " REAL);";
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT NOT NULL, " + ADDRESS + " TEXT, " + IMAGE + " TEXT, " + PRICE+ " REAL, " + PHONE +" TEXT);";
 
     public DBHelper(Context context) {
         super(context,
@@ -64,7 +66,8 @@ public class DBHelper extends SQLiteOpenHelper {
         String address = data.getString(data.getColumnIndexOrThrow(ADDRESS));
         String image = data.getString(data.getColumnIndexOrThrow(IMAGE));
         double price = data.getDouble(data.getColumnIndexOrThrow(PRICE));
+        String phone = data.getString(data.getColumnIndexOrThrow(PHONE));
 
-        return new AdModel(title, address, image, price);
+        return new AdModel(title, address, image, price, phone);
     }
 }

@@ -22,4 +22,5 @@
     <string name="adPriceTint">Prix</string>
     <string name="errorMissingImage">Vous devez choisir une image</string>
     <string name="errorMissingFields">Tous les champs doivent être remplis.</string>
+    <string name="adPhoneTint">Téléphone</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.tpleboncoin;
 
 import static com.example.tpleboncoin.DBHelper.ADDRESS;
 import static com.example.tpleboncoin.DBHelper.IMAGE;
+import static com.example.tpleboncoin.DBHelper.PHONE;
 import static com.example.tpleboncoin.DBHelper.PRICE;
 import static com.example.tpleboncoin.DBHelper.TITLE;
 import static com.example.tpleboncoin.DBHelper._ID;
@@ -116,10 +117,10 @@ public class MainActivity extends AppCompatActivity {
             String address = cursor.getString(cursor.getColumnIndexOrThrow(ADDRESS));
             String image = cursor.getString(cursor.getColumnIndexOrThrow(IMAGE));
             double price = cursor.getDouble(cursor.getColumnIndexOrThrow(PRICE));
+            String phone = cursor.getString(cursor.getColumnIndexOrThrow(PHONE));
 
 
-
-            adList.add(new AdModel(id, title, address, image, price));
+            adList.add(new AdModel(id, title, address, image, price, phone));
         }
 
         RecyclerView recyclerView = (RecyclerView) binding.listeAnnonces;

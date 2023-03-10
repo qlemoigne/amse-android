@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
 import com.example.tpleboncoin.AdModel;
@@ -71,7 +72,7 @@ public class AdViewActivity extends AppCompatActivity {
             }
         }
 
-        Button button = findViewById(R.id.adDataPrice);
+        FloatingActionButton button = findViewById(R.id.adBtnBuy);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +82,14 @@ public class AdViewActivity extends AppCompatActivity {
             }
         });
 
-
+        ((Button) findViewById(R.id.adBtnContact)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + data.getPhone()));
+                startActivity(intent);
+            }
+        });
 
     }
 }

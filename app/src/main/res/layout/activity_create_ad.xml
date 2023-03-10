@@ -159,11 +159,39 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/adPhoneTint"
+                android:id="@+id/labelPhone"
+                app:layout_constraintTop_toBottomOf="@id/labelPrice"
+
+                android:layout_marginTop="16dp"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+
+
+                style="@style/textInputLayout"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/formAdPhone"
+
+                    android:inputType="phone"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/submitBtn"
-                    app:layout_constraintTop_toBottomOf="@id/labelPrice"
+                    app:layout_constraintTop_toBottomOf="@id/labelPhone"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     android:text="@string/submitBtn"

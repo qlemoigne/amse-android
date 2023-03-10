@@ -15,6 +15,8 @@ public class AdModel implements Serializable {
 
     private double price;
 
+    private String phone;
+
     @Nullable
     private Bitmap cache;
 
@@ -26,13 +28,14 @@ public class AdModel implements Serializable {
      * @param image
      * @param price
      */
-    public AdModel(long _id, String title, String address, String image, double price)
+    public AdModel(long _id, String title, String address, String image, double price, String phone)
     {
         this._id = _id;
         this.title = title;
         this.address = address;
         this.image = image;
         this.price = price;
+        this.phone = phone;
     }
 
     /**
@@ -42,13 +45,14 @@ public class AdModel implements Serializable {
      * @param image
      * @param price
      */
-    public AdModel(String title, String address, String image, double price)
+    public AdModel(String title, String address, String image, double price, String phone)
     {
         this._id = -1;
         this.title = title;
         this.address = address;
         this.image = image;
         this.price = price;
+        this.phone = phone;
     }
 
     public long getID() {
@@ -60,6 +64,9 @@ public class AdModel implements Serializable {
         return _id != -1;
     }
 
+    public String getPhone() {
+        return phone;
+    }
 
     public boolean isImageLoaded()
     {

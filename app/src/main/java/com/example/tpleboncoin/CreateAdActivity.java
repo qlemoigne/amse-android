@@ -98,7 +98,10 @@ public class CreateAdActivity extends AppCompatActivity {
 
                 String priceText = ((TextInputLayout) findViewById(R.id.labelPrice)).getEditText().getText().toString();
 
-                if(title.length() <= 0 || address.length() <= 0 || priceText.length() <= 0)
+                String phoneText = ((TextInputLayout) findViewById(R.id.labelPhone)).getEditText().getText().toString();
+
+
+                if(title.length() <= 0 || address.length() <= 0 || priceText.length() <= 0 || phoneText.length() <= 0)
                 {
                     working = false;
                     Toast.makeText(CreateAdActivity.this, R.string.errorMissingFields, Toast.LENGTH_LONG).show();
@@ -149,7 +152,7 @@ public class CreateAdActivity extends AppCompatActivity {
 
                 }
 
-                DBManager.getDBManager(CreateAdActivity.this).insert(new AdModel(title, address, imgUrl, price));
+                DBManager.getDBManager(CreateAdActivity.this).insert(new AdModel(title, address, imgUrl, price, phoneText));
 
                 Intent mainActivityIntent = new Intent(CreateAdActivity.this, MainActivity.class);
                 mainActivityIntent.putExtra("newAdTittle", title);

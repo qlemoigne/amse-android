@@ -92,17 +92,33 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
-            android:id="@+id/adDataPrice"
+            android:id="@+id/adBtnContact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/baseline_shopping_basket_24"
-            android:text="Acheter"
-            app:layout_constraintRight_toRightOf="parent">
+            android:layout_marginRight="16dp"
+            android:drawableRight="@drawable/baseline_phone_24"
+
+            android:text="Contacter"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteY="5dp">
 
         </Button>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/adBtnBuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/fab_margin"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:layout_marginBottom="16dp"
+        app:srcCompat="@drawable/baseline_shopping_basket_24"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
