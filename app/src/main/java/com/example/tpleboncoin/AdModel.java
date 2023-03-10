@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class AdModel implements Serializable {
 
+    private long _id;
     private String title;
     private String address;
     private String image;
@@ -18,7 +19,24 @@ public class AdModel implements Serializable {
     private Bitmap cache;
 
     /**
-     *
+     * Constructeur complet
+     * @param _id
+     * @param title
+     * @param address
+     * @param image
+     * @param price
+     */
+    public AdModel(long _id, String title, String address, String image, double price)
+    {
+        this._id = _id;
+        this.title = title;
+        this.address = address;
+        this.image = image;
+        this.price = price;
+    }
+
+    /**
+     * Constructeur light
      * @param title
      * @param address
      * @param image
@@ -26,11 +44,22 @@ public class AdModel implements Serializable {
      */
     public AdModel(String title, String address, String image, double price)
     {
+        this._id = -1;
         this.title = title;
         this.address = address;
         this.image = image;
         this.price = price;
     }
+
+    public long getID() {
+        return _id;
+    }
+
+    public boolean hasID()
+    {
+        return _id != -1;
+    }
+
 
     public boolean isImageLoaded()
     {

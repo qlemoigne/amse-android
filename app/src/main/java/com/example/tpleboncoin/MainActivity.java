@@ -4,6 +4,7 @@ import static com.example.tpleboncoin.DBHelper.ADDRESS;
 import static com.example.tpleboncoin.DBHelper.IMAGE;
 import static com.example.tpleboncoin.DBHelper.PRICE;
 import static com.example.tpleboncoin.DBHelper.TITLE;
+import static com.example.tpleboncoin.DBHelper._ID;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -119,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         // DBManager.getDBManager(this).init();
         while(cursor.moveToNext())
         {
+            long id = cursor.getLong(cursor.getColumnIndexOrThrow(_ID));
             String title = cursor.getString(cursor.getColumnIndexOrThrow(TITLE));
             String address = cursor.getString(cursor.getColumnIndexOrThrow(ADDRESS));
             String image = cursor.getString(cursor.getColumnIndexOrThrow(IMAGE));
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            adList.add(new AdModel(title, address, image, price));
+            adList.add(new AdModel(id, title, address, image, price));
         }
 
         RecyclerView recyclerView = (RecyclerView) binding.listeAnnonces;
