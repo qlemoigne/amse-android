@@ -17,8 +17,10 @@
         android:layout_marginTop="16dp"
         android:text="@string/activityCreateAdTitle"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="32dp"
+        android:textColor="@color/main"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/creamcake"
         app:layout_constraintLeft_toLeftOf="parent"
 
 
