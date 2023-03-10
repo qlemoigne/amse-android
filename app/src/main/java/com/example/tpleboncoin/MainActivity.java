@@ -132,7 +132,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         RecyclerView recyclerView = (RecyclerView) binding.listeAnnonces;
-        AdAdapter adapter = new AdAdapter(this,adList);
+        AdAdapter adapter = new AdAdapter(this, adList) {
+            @Override
+            public void onAdRemoved() {
+                updateAdList();
+            }
+        };
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(adapter);
 

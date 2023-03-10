@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ import com.google.android.material.transition.Hold;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
+public abstract class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
 
     private final Context context;
     private final ArrayList<AdModel> adModelArrayList;
@@ -36,6 +37,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
     }
 
 
+    public abstract void onAdRemoved();
 
     @NonNull
     @Override
@@ -53,23 +55,32 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
     public void onBindViewHolder(@NonNull AdViewHolder holder, int position) {
 
         final AdModel data = adModelArrayList.get(position);
+        holder.loader.setVisibility(View.VISIBLE);
         holder.title.setText(data.getTitle());
         holder.address.setText(data.getAddress());
 
         // partie load image
         if(data.isInvalidImage())
         {
+            // pas d'image
             holder.image.setImageResource(R.drawable.image0);
-
+            holder.loader.setVisibility(View.GONE);
         } else {
             if(data.isImageLoaded())
             {
+                // la c'est déjà en cache
                 holder.image.setImageBitmap(data.getCachedImage());
+                holder.loader.setVisibility(View.GONE);
             } else {
                 if(data.isLocal()) {
+
+                    // la c'est localement
+
                     holder.image.setImageURI(Uri.parse(MainActivity.CACHE_DIR + "/" + data.getImage()));
+                    holder.loader.setVisibility(View.GONE);
                 } else {
 
+                    // Cas où on télécharge img internet
                     DownloadImageTask task = new DownloadImageTask() {
                         @Override
                         protected Bitmap doInBackground(String... urls) {
@@ -81,6 +92,8 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
 
                             data.setCachedImage(result);
                             holder.image.setImageBitmap(result);
+
+                            holder.loader.setVisibility(View.GONE);
 
 
                         }
@@ -118,6 +131,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
                         Toast.makeText(context, "Annonce supprimé !", Toast.LENGTH_LONG).show();
                         // Suppression de l'annonce
                         DBManager.getDBManager(context).delete(data.getID());
+                        onAdRemoved();
                     }
                 });
                 builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
@@ -142,11 +156,14 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
         public TextView address;
         public ShapeableImageView image;
 
+        public ProgressBar loader;
+
         public AdViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.txt_title);
             address = itemView.findViewById(R.id.txt_address);
             image = itemView.findViewById(R.id.imageView);
+            loader = itemView.findViewById(R.id.progressBar);
         }
     }
 }
