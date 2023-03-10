@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
-    ArrayList<AdModel> adList;
+    ArrayList<AdModel> adList = new ArrayList<>();
 
 
     @Override
@@ -69,16 +69,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-     /* adList.add( new AdModel("Titre 10", "15 rue de la berge 595500 Douai", "", 15.5));
-        adList.add( new AdModel("Titre 11", "15 rue de la berge 595500 Douai", "", 15.5));
-        adList.add( new AdModel("Titre 12", "15 rue de la berge 595500 Douai","", 15.5));
-        adList.add( new AdModel("Titre 13", "15 rue de la berge 595500 Douai", "", 15.5));
-        adList.add( new AdModel("Titre 14", "15 rue de la berge 595500 Douai", "", 15.5));
-        adList.add( new AdModel("Titre 15", "15 rue de la berge 595500 Douai","", 15.5));
-*/
-
-
-
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
+        updateAdList();
 
 
     }
@@ -100,15 +90,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        updateAdList();
+
     }
 
     public void updateAdList()
     {
+        if(adList.size() > 0)
+        {
+            adList.clear();
+        }
 
-
-
-        ArrayList<AdModel> adList = new ArrayList<>();
 
         Cursor cursor = DBManager.getDBManager(this).fetch();
 
