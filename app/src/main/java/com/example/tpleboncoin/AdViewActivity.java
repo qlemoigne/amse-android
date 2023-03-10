@@ -42,10 +42,11 @@ public class AdViewActivity extends AppCompatActivity {
         if(data.isInvalidImage())
         {
             imageView.setImageResource(R.drawable.image0);
-
+            findViewById(R.id.progressBar).setVisibility(View.GONE);
         } else {
             if(data.isLocal()) {
                 imageView.setImageURI(Uri.parse(MainActivity.CACHE_DIR + "/" + data.getImage()));
+                findViewById(R.id.progressBar).setVisibility(View.GONE);
             } else {
 
                 DownloadImageTask task = new DownloadImageTask() {
@@ -59,6 +60,7 @@ public class AdViewActivity extends AppCompatActivity {
 
                         data.setCachedImage(result);
                         imageView.setImageBitmap(result);
+                        findViewById(R.id.progressBar).setVisibility(View.GONE);
 
 
                     }
