@@ -12,11 +12,13 @@
 
     <string name="activityMainTitle">Annonces</string>
     <string name="activityCreateAdTitle">Déposer une annonce</string>
+    <string name="activityEditAdTitle">Modifier une annonce</string>
 
     <string name="adNameTint">Nom de l\'annonce</string>
     <string name="adAddressTint">Adresse</string>
 
     <string name="submitBtn">Publier l\'annonce</string>
+    <string name="editBtn">Modifer l\'annonce</string>
     <string name="editImageGaleryBtn">Galerie</string>
     <string name="editImageCameraBtn">Caméra</string>
     <string name="adPriceTint">Prix</string>

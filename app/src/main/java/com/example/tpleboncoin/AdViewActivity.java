@@ -82,6 +82,18 @@ public class AdViewActivity extends AppCompatActivity {
             }
         });
 
+        ((ShapeableImageView) findViewById(R.id.adBtnEdit)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent1 = new Intent(AdViewActivity.this, CreateAdActivity.class);
+                data.setCachedImage(null);
+                intent1.putExtra("editedAd", data);
+                startActivity(intent1);
+
+            }
+        });
+
         ((Button) findViewById(R.id.adBtnContact)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

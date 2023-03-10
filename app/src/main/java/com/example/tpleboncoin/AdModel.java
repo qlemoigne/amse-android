@@ -94,6 +94,22 @@ public class AdModel implements Serializable {
         return address;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getImage() {
         return image;
     }

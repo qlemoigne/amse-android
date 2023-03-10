@@ -67,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(binding.getRoot(), "L'annonce " + intent.getStringExtra("newAdTittle") + " a été créé succès !", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
+
+            if(intent.hasExtra("updatedAdTittle"))
+            {
+                Snackbar.make(binding.getRoot(), "L'annonce " + intent.getStringExtra("updatedAdTittle") + " a été modifié avec succès !", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
         }
 
 
