@@ -1,6 +1,7 @@
 package com.example.tpleboncoin;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ShapeDrawable;
@@ -11,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.example.tpleboncoin.AdModel;
 import com.google.android.material.transition.Hold;
@@ -100,6 +103,31 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
                 intent.putExtra("ad", data);
 
                 context.startActivity(intent);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
+                builder.setTitle("Supprimer");
+                builder.setMessage("Voulez-vous supprimer l'annonce ?");
+                builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(context, "Annonce supprimé !", Toast.LENGTH_LONG).show();
+                        // Suppression de l'annonce
+                        DBManager.getDBManager(context).delete(data.getID());
+                    }
+                });
+                builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.show();
+                return true;
             }
         });
     }
